@@ -1,7 +1,5 @@
-include ApplicationHelper
-# it includes the ApplicationHelper module, located in:
+include ApplicationHelper # it includes the ApplicationHelper module, located in
 # app/helpers/application_helper.rb
-
 # so you don't need the sh!t below.
 
 # Returns the full title on a per-page basis.
@@ -13,3 +11,15 @@ include ApplicationHelper
 #    "#{page_title} | #{base_title}"
 #  end
 #end
+
+def valid_signin(user)
+  fill_in "Email",    with: user.email
+  fill_in "Password", with: user.password
+  click_button "Sign in"
+end
+
+RSpec::Matchers.define :have_error_message do |message|
+  match do |page|
+    page.should have_selector('div.alert.alert-error', text: message)
+  end
+end
