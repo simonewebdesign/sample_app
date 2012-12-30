@@ -10,7 +10,7 @@ env:
 # - DB=mysql
   - DB=postgresql
 script:
-  - RAILS_ENV=test bundle exec rake --trace db:migrate sample_app_test
+  - RAILS_ENV=test bundle exec rake --trace db:migrate
 before_script:
 # - mysql -e 'create database name_app_test'
   - psql -c 'create database sample_app_test' -U postgres
