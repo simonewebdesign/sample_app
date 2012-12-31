@@ -8,7 +8,7 @@ describe "User pages" do
     before { visit signup_path }
 
     it { should have_selector('h1',    text: 'Sign up') }
-    it { should have_selector('title', text: 'Sign up') }
+    it { should have_title('Sign up') }
 
   end
 
@@ -20,7 +20,7 @@ describe "User pages" do
       it { should have_selector('h1',    text: user.name) }
     end
     define "username should be in title" do      
-      it { should have_selector('title', text: user.name) }
+      it { should have_title(user.name) }
     end
   end
 
@@ -39,7 +39,7 @@ describe "User pages" do
       describe "after submission" do
         before { click_button submit }
 
-        it { should have_selector('title', text: 'Sign up') }
+        it { should have_title('Sign up') }
         it { should have_content('error') }
       end
       
@@ -61,9 +61,10 @@ describe "User pages" do
         before { click_button submit }
         let(:user) { User.find_by_email('user@example.com') }
 
-        it { should have_selector('title', text: user.name) }
-        it { should have_selector('div.alert.alert-success', text: 'Welcome') }
+        it { should have_title(user.name) }
+        it { should have_success_message('Welcome') }
         it { should have_link('Sign out') }
+
 
         describe "followed by signout" do
           before { click_link "Sign out" }
