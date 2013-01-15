@@ -9,6 +9,7 @@ describe "User pages" do
     let(:user) { FactoryGirl.create(:user) }
 
     before do
+      visit signin_path
       sign_in user
       visit users_path
     end
@@ -37,6 +38,7 @@ describe "User pages" do
       describe "as an admin user" do
         let(:admin) { FactoryGirl.create(:admin) }
         before do
+          visit signin_path
           sign_in admin
           visit users_path
         end
@@ -93,10 +95,10 @@ describe "User pages" do
 
     describe "with valid information" do
       before do
-        fill_in "Name",         with: "Example User"
-        fill_in "Email",        with: "user@example.com"
-        fill_in "Password",     with: "foobar"
-        fill_in "Confirmation", with: "foobar"
+        fill_in "Name",             with: "Example User"
+        fill_in "Email",            with: "user@example.com"
+        fill_in "Password",         with: "foobar"
+        fill_in "Confirm Password", with: "foobar"
       end
 
       it "should create a user" do
@@ -123,6 +125,7 @@ describe "User pages" do
   describe "edit" do
     let(:user) { FactoryGirl.create(:user) }
     before do
+      visit signin_path
       sign_in user
       visit edit_user_path(user)
     end
